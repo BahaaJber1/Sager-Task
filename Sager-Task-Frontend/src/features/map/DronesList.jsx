@@ -14,7 +14,7 @@ function DronesList() {
 	if (status === "error") return <Error>{error}</Error>;
 
 	return (
-		<ul>
+		<ul className="w-[330px] bg-[#111] p-5 overflow-y-scroll no-scrollbar max-h-screen">
 			<h2>DRONE FLYING</h2>
 
 			{drones.map((drone) => {
