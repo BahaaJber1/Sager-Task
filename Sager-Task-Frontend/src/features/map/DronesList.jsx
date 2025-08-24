@@ -1,8 +1,15 @@
 import { useDrone } from "../../../context/DroneContext";
+
 import DroneItem from "./DroneItem";
+import Error from "../../components/Error";
+import Spinner from "../../components/Spinner";
 
 function DronesList() {
 	const { drones, status, error } = useDrone();
+
+	if (!drones) return null;
+
+	if (status === "loading") return <Spinner />;
 
 	if (status === "error") return <Error>{error}</Error>;
 
@@ -10,9 +17,8 @@ function DronesList() {
 		<ul>
 			<h2>DRONE FLYING</h2>
 
-			{drones.map((drone, index) => {
-				if (!drone || !drone.properties) return null;
-				return <DroneItem drone={drone} key={index} />;
+			{drones.map((drone) => {
+				return <DroneItem drone={drone} key={drone.properties.serial} />;
 			})}
 		</ul>
 	);

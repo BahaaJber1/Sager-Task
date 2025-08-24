@@ -1,5 +1,11 @@
+import DroneList from "../features/map/DronesList";
+
 function Map() {
-	return <div>Map page</div>;
+	return (
+		<>
+			<DroneList />
+		</>
+	);
 }
 
 export default Map;
