@@ -1,35 +1,16 @@
-import { Link } from "react-router";
 import Logo from "./Logo";
+import HeaderMenu from "./HeaderMenu";
+import HeaderUser from "./HeaderUser";
 
 function Header() {
 	return (
-		<ul className="h-18 pr-8 bg-black flex items-center justify-between">
-			<Link to="/">
-				<Logo />
-			</Link>
-
-			<div className="flex gap-8 items-center text-white">
-				<li>
-					<Link>
-						<img src="capture-svgrepo-com.svg" />
-					</Link>
-				</li>
-				<li>
-					<Link>
-						<img src="language-svgrepo-com.svg" />
-					</Link>
-				</li>
-				<li>
-					<Link>
-						<img src="bell.svg" />
-					</Link>
-				</li>
-				<li className="border-l p-5">
-					<p>Hello, Bahaa Jber</p>
-					<p>Frontend Enginner</p>
-				</li>
+		<header className="h-18 px-8 bg-black flex items-center justify-between">
+			<Logo />
+			<div className="flex items-center gap-8">
+				<HeaderMenu />
+				<HeaderUser />
 			</div>
-		</ul>
+		</header>
 	);
 }
 
