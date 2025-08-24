@@ -1,29 +1,21 @@
-import { useDrone } from "../context/DroneContext";
-import Error from "./components/Error";
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router";
+
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Map = lazy(() => import("./pages/Map"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 function App() {
-	const { drones, status, error } = useDrone();
-
-	if (status === "error") return <Error>{error}</Error>;
-
 	return (
-		<>
-			<ul>
-				<h2>DRONE FLYING</h2>
-				{drones.map((drone, index) => {
-					if (!drone || !drone.properties) return null;
-					const { serial, registration, Name, organization, pilot } =
-						drone.properties;
-					return (
-						<li key={index}>
-							<h3>{Name}</h3>
-							Serial # {serial} - Registration #{registration} - Pilot {pilot} -
-							Organization {organization}
-						</li>
-					);
-				})}
-			</ul>
-		</>
+		<BrowserRouter>
+			<Suspense fallback={<div>Wait</div>}>
+				<Routes>
+					<Route path="/" element={<Dashboard />} />
+					<Route path="map" element={<Map />} />
+					<Route path="*" element={<PageNotFound />} />
+				</Routes>
+			</Suspense>
+		</BrowserRouter>
 	);
 }
 
