@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { useDrone } from "../context/DroneContext";
+import Error from "./components/Error";
 
 function App() {
-	const [drones, setDrones] = useState([]);
+	const { drones, status, error } = useDrone();
 
-	useEffect(() => {
-		const socket = io("http://localhost:9013");
-
-		socket.on("message", (data) => {
-			setDrones((prev) => [...prev, ...data.features]);
-		});
-
-		return () => socket.disconnect();
-	}, []);
+	if (status === "error") return <Error>{error}</Error>;
 
 	return (
 		<>
 			<ul>
 				<h2>DRONE FLYING</h2>
 				{drones.map((drone, index) => {
+					if (!drone || !drone.properties) return null;
 					const { serial, registration, Name, organization, pilot } =
 						drone.properties;
 					return (
