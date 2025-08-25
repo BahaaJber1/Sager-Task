@@ -4,7 +4,7 @@ import HeaderUser from "./HeaderUser";
 
 function Header() {
 	return (
-		<header className="h-18 px-8 bg-black flex items-center justify-between">
+		<header className="py-3 px-8 bg-black flex items-center justify-between">
 			<Logo />
 			<div className="flex items-center gap-8">
 				<HeaderMenu />

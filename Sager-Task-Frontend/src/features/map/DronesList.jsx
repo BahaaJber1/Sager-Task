@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router";
 
-import { useDrone } from "../../../context/DroneContext";
+import { useDrone } from "../../context/DroneContext";
 
 import DroneItem from "./DroneItem";
 import Error from "../../components/Error";
 import Spinner from "../../components/Spinner";
+import HorizontalLine from "../../components/HorizontalLine";
 
 function DronesList() {
 	const { drones, status, error } = useDrone();
 	const [isOpen, setIsOpen] = useState(true);
-
-	const location = useLocation();
+	const [selectedTab, setSelectedTab] = useState("drones");
 
 	function handleShow() {
 		setIsOpen((isOpen) => !isOpen);
+	}
+
+	function handleTab(tab) {
+		setSelectedTab(tab);
 	}
 
 	if (!drones) return null;
@@ -24,15 +27,15 @@ function DronesList() {
 	if (status === "error") return <Error>{error}</Error>;
 
 	return (
-		<ul
+		<div
 			className={`${
 				isOpen ? "" : "opacity-50"
-			} w-[330px] bg-[#111] p-5 overflow-y-scroll no-scrollbar max-h-screen`}
+			} absolute top-0 left-5 z-10 w-[330px] bg-[#111] p-5 overflow-y-scroll no-scrollbar h-full`}
 		>
-			<h2 className="pb-10 font-bold flex justify-between">
+			<h2 className="pb-10 text-2xl font-bold flex justify-between">
 				DRONE FLYING
 				<span
-					className="bg-[#272727] w-6 h-6 text-center rounded-full text-black cursor-pointer"
+					className="bg-[#272727] w-6 h-6 text-center rounded-full text-black cursor-pointer text-base"
 					onClick={handleShow}
 				>
 					{isOpen ? <span>&or;</span> : <span>&and;</span>}
@@ -41,21 +44,43 @@ function DronesList() {
 
 			<ul className="flex gap-5 pb-5">
 				<li>
-					<NavLink to="/map">Drones</NavLink>
+					<button
+						className={`px-4 py-2 cursor-pointer ${
+							selectedTab === "drones"
+								? "border-b-4 border-red-800"
+								: "text-gray-400"
+						}`}
+						onClick={() => handleTab("drones")}
+					>
+						Drones
+					</button>
 				</li>
 				<li>
-					<NavLink to="/map/previous">Fligts History</NavLink>
+					<button
+						className={`px-4 py-2 cursor-pointer ${
+							selectedTab === "history"
+								? "border-b-4 border-red-800"
+								: "text-gray-400"
+						}`}
+						onClick={() => handleTab("history")}
+					>
+						Flights History
+					</button>
 				</li>
 			</ul>
 
+			<HorizontalLine />
+
 			{isOpen &&
-				location.pathname === "/map" &&
+				selectedTab === "drones" &&
 				drones.map((drone) => {
 					return <DroneItem drone={drone} key={drone.properties.serial} />;
 				})}
 
-			{isOpen && location.pathname === "/map/previous" && <span>Previous</span>}
-		</ul>
+			{isOpen && selectedTab === "history" && (
+				<p className="text-gray-400 mt-4 h-">No flight history available.</p>
+			)}
+		</div>
 	);
 }
 

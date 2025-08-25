@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 
-import { DroneProvider } from "../context/DroneContext";
+import { DroneProvider } from "./context/DroneContext";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import Spinner from "./components/Spinner";
@@ -25,10 +25,7 @@ function App() {
 									<Map />
 								</DroneProvider>
 							}
-						>
-							<Route index element={<DronesList />} />
-							<Route path="previous" element={<DronesList />} />
-						</Route>
+						/>
 						<Route path="*" element={<PageNotFound />} />
 					</Route>
 				</Routes>

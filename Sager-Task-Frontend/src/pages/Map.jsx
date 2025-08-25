@@ -1,10 +1,12 @@
-import { Outlet } from "react-router";
+import DroneMap from "../features/map/DroneMap";
+import DronesList from "../features/map/DronesList";
 
 function Map() {
 	return (
-		<>
-			<Outlet />
-		</>
+		<div className="relative w-full h-full">
+			<DroneMap />
+			<DronesList />
+		</div>
 	);
 }
 
