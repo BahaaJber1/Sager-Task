@@ -14,3 +14,6 @@
     }
 }
 
+li:has(.active) {
+    @apply bg-[#272727] border-l-5 border-red-700
+}
