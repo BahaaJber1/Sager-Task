@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 
 import Spinner from "./components/Spinner";
 import AppLayout from "./components/AppLayout";
+import DronesList from "./features/map/DronesList";
 
 const Map = lazy(() => import("./pages/Map"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -24,7 +25,10 @@ function App() {
 									<Map />
 								</DroneProvider>
 							}
-						/>
+						>
+							<Route index element={<DronesList />} />
+							<Route path="previous" element={<DronesList />} />
+						</Route>
 						<Route path="*" element={<PageNotFound />} />
 					</Route>
 				</Routes>

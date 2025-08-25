@@ -1,13 +1,17 @@
+import { useState } from "react";
+import { NavLink, useLocation } from "react-router";
+
 import { useDrone } from "../../../context/DroneContext";
 
 import DroneItem from "./DroneItem";
 import Error from "../../components/Error";
 import Spinner from "../../components/Spinner";
-import { useState } from "react";
 
 function DronesList() {
 	const { drones, status, error } = useDrone();
 	const [isOpen, setIsOpen] = useState(true);
+
+	const location = useLocation();
 
 	function handleShow() {
 		setIsOpen((isOpen) => !isOpen);
@@ -35,10 +39,22 @@ function DronesList() {
 				</span>
 			</h2>
 
+			<ul className="flex gap-5 pb-5">
+				<li>
+					<NavLink to="/map">Drones</NavLink>
+				</li>
+				<li>
+					<NavLink to="/map/previous">Fligts History</NavLink>
+				</li>
+			</ul>
+
 			{isOpen &&
+				location.pathname === "/map" &&
 				drones.map((drone) => {
 					return <DroneItem drone={drone} key={drone.properties.serial} />;
 				})}
+
+			{isOpen && location.pathname === "/map/previous" && <span>Previous</span>}
 		</ul>
 	);
 }

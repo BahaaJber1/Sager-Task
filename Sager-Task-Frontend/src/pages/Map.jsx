@@ -1,9 +1,9 @@
-import DroneList from "../features/map/DronesList";
+import { Outlet } from "react-router";
 
 function Map() {
 	return (
 		<>
-			<DroneList />
+			<Outlet />
 		</>
 	);
 }
