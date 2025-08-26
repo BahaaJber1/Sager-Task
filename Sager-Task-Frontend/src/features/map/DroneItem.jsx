@@ -1,11 +1,15 @@
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import HorizontalLine from "../../components/HorizontalLine";
+import { useDrone } from "../../context/DroneContext";
 
 function DroneItem({ drone, selected }) {
 	const { serial, registration, Name, organization, pilot } = drone.properties;
-	const { coordinates } = drone.geometry;
-	const lng = coordinates[0];
-	const lat = coordinates[1];
+	const { dronePaths } = useDrone();
+	const path = dronePaths[registration];
+	const latest =
+		path && path.length ? path[path.length - 1] : drone.geometry.coordinates;
+	const lng = latest[0];
+	const lat = latest[1];
 
 	// Registration starts with B = green, else red
 	const isAllowed = registration?.split("-")[1].startsWith("B");
@@ -13,7 +17,7 @@ function DroneItem({ drone, selected }) {
 	const navigate = useNavigate();
 
 	function handleClick() {
-		navigate(`/map/${serial}/${lat}/${lng}`);
+		navigate(`/map/${registration}/${lat}/${lng}`);
 	}
 
 	return (

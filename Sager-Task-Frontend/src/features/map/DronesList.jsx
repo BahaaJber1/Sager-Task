@@ -9,10 +9,10 @@ import HorizontalLine from "../../components/HorizontalLine";
 import { useParams } from "react-router";
 
 function DronesList() {
-	const { drones, status, error } = useDrone();
+	const { status, error, uniqueDrones } = useDrone();
 	const [isOpen, setIsOpen] = useState(true);
 	const [selectedTab, setSelectedTab] = useState("drones");
-	const { serial } = useParams();
+	const { registration } = useParams();
 
 	function handleShow() {
 		setIsOpen((isOpen) => !isOpen);
@@ -22,7 +22,7 @@ function DronesList() {
 		setSelectedTab(tab);
 	}
 
-	if (!drones) return null;
+	if (!uniqueDrones) return null;
 
 	if (status === "loading") return <Spinner />;
 
@@ -77,12 +77,12 @@ function DronesList() {
 
 			{isOpen &&
 				selectedTab === "drones" &&
-				drones.map((drone) => {
+				uniqueDrones.map((drone) => {
 					return (
 						<DroneItem
 							drone={drone}
-							key={drone.properties.serial}
-							selected={drone.properties.serial === serial}
+							key={drone.properties.registration}
+							selected={drone.properties.registration === registration}
 						/>
 					);
 				})}

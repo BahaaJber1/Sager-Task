@@ -18,7 +18,7 @@ function App() {
 					<Routes>
 						<Route element={<AppLayout />}>
 							<Route path="/" element={<Dashboard />} />
-							<Route path="/map/:serial/:lat/:lng" element={<Map />} />
+							<Route path="/map/:registration/:lat/:lng" element={<Map />} />
 							<Route path="map" element={<Map />} />
 							<Route path="*" element={<PageNotFound />} />
 						</Route>

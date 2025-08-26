@@ -1,5 +1,13 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import {
+	createContext,
+	useContext,
+	useReducer,
+	useEffect,
+	useState,
+} from "react";
 import { io } from "socket.io-client";
+import filterDronesByRegestration from "../utils/FilterDronesByRegestration";
+import updateDronePaths from "../utils/UpdateDronePaths";
 
 const DroneContext = createContext();
 
@@ -31,6 +39,8 @@ function DroneProvider({ children }) {
 		initialState
 	);
 	const numDrones = drones.length;
+	const uniqueDrones = filterDronesByRegestration(drones);
+	const [dronePaths, setDronePaths] = useState({});
 
 	useEffect(() => {
 		const socket = io("http://localhost:9013");
@@ -40,6 +50,7 @@ function DroneProvider({ children }) {
 				type: "dataReceived",
 				payload: data.features,
 			});
+			setDronePaths((prev) => updateDronePaths(data.features, prev));
 		});
 
 		socket.on("connect_error", (err) => {
@@ -60,6 +71,8 @@ function DroneProvider({ children }) {
 				status,
 				error,
 				numDrones,
+				uniqueDrones,
+				dronePaths,
 			}}
 		>
 			{children}
