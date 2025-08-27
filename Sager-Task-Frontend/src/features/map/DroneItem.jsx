@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router";
 import HorizontalLine from "../../components/HorizontalLine";
-import { useDrone } from "../../context/DroneContext";
+import { useDrones } from "../../context/DronesContext";
 
 function DroneItem({ drone, selected }) {
 	const { serial, registration, Name, organization, pilot } = drone.properties;
-	const { dronePaths } = useDrone();
+	const { dronePaths } = useDrones();
 	const path = dronePaths[registration];
 	const latest =
 		path && path.length ? path[path.length - 1] : drone.geometry.coordinates;

@@ -17,3 +17,24 @@
 li:has(.active) {
     @apply bg-[#272727] border-l-5 border-red-700
 }
+
+/* Custom Mapbox popup styles for dark, compact look */
+.mapboxgl-popup-content {
+    background: #111 !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: #fff !important;
+    padding: 0.5rem 1rem !important;
+    min-width: 140px;
+    font-family: inherit;
+}
+
+.mapboxgl-popup {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.mapboxgl-popup-tip {
+    border-top-color: #111 !important;
+}

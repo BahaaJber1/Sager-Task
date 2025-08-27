@@ -4,12 +4,14 @@ import {
 	useReducer,
 	useEffect,
 	useState,
+	useMemo,
 } from "react";
 import { io } from "socket.io-client";
+
 import filterDronesByRegestration from "../utils/FilterDronesByRegestration";
 import updateDronePaths from "../utils/UpdateDronePaths";
 
-const DroneContext = createContext();
+const DronesContext = createContext();
 
 const initialState = {
 	drones: [],
@@ -33,14 +35,17 @@ function reducer(state, action) {
 	}
 }
 
-function DroneProvider({ children }) {
+function DronesProvider({ children }) {
 	const [{ drones, status, error }, dispatch] = useReducer(
 		reducer,
 		initialState
 	);
-	const numDrones = drones.length;
-	const uniqueDrones = filterDronesByRegestration(drones);
 	const [dronePaths, setDronePaths] = useState({});
+
+	const uniqueDrones = useMemo(
+		() => filterDronesByRegestration(drones),
+		[drones]
+	);
 
 	useEffect(() => {
 		const socket = io("http://localhost:9013");
@@ -65,26 +70,25 @@ function DroneProvider({ children }) {
 	}, []);
 
 	return (
-		<DroneContext.Provider
+		<DronesContext.Provider
 			value={{
 				drones,
 				status,
 				error,
-				numDrones,
 				uniqueDrones,
 				dronePaths,
 			}}
 		>
 			{children}
-		</DroneContext.Provider>
+		</DronesContext.Provider>
 	);
 }
 
-function useDrone() {
-	const context = useContext(DroneContext);
+function useDrones() {
+	const context = useContext(DronesContext);
 	if (context === undefined)
 		throw new Error("The DroneContext was used outside DroneContextProvider");
 	return context;
 }
 
-export { useDrone, DroneProvider };
+export { useDrones, DronesProvider };

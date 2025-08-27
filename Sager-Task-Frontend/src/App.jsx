@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 
-import { DroneProvider } from "./context/DroneContext";
+import { DronesProvider } from "./context/DronesContext";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import Spinner from "./components/Spinner";
@@ -13,7 +13,7 @@ const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 function App() {
 	return (
 		<BrowserRouter>
-			<DroneProvider>
+			<DronesProvider>
 				<Suspense fallback={<Spinner />}>
 					<Routes>
 						<Route element={<AppLayout />}>
@@ -24,7 +24,7 @@ function App() {
 						</Route>
 					</Routes>
 				</Suspense>
-			</DroneProvider>
+			</DronesProvider>
 		</BrowserRouter>
 	);
 }

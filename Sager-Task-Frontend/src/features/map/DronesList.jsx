@@ -1,15 +1,15 @@
 import { useState } from "react";
+import { useParams } from "react-router";
 
-import { useDrone } from "../../context/DroneContext";
+import { useDrones } from "../../context/DronesContext";
 
 import DroneItem from "./DroneItem";
 import Error from "../../components/Error";
 import Spinner from "../../components/Spinner";
 import HorizontalLine from "../../components/HorizontalLine";
-import { useParams } from "react-router";
 
 function DronesList() {
-	const { status, error, uniqueDrones } = useDrone();
+	const { status, error, uniqueDrones } = useDrones();
 	const [isOpen, setIsOpen] = useState(true);
 	const [selectedTab, setSelectedTab] = useState("drones");
 	const { registration } = useParams();
