@@ -4,12 +4,23 @@ import { io } from "socket.io-client";
 import filterDronesByRegestration from "../features/map/utils/filterDronesByRegestration";
 import updateDronePaths from "../features/map/utils/UpdateDronePaths";
 
+/**
+ * Centralized data source for drones.
+ * - Opens a socket connection and streams incoming drone features
+ * - Maintains accumulated list of drones and derived unique list
+ * - Computes and stores per-registration flight paths
+ *
+ * Returns immutable view-model values for consumers (context/components).
+ */
 const initialState = {
     drones: [],
     status: "loading",
     error: "",
 };
 
+/**
+ * Reducer for incoming socket data and error handling.
+ */
 function reducer(state, action) {
     switch (action.type) {
         case "dataReceived":
@@ -25,6 +36,10 @@ function reducer(state, action) {
     }
 }
 
+/**
+ * Hook that manages drone data lifecycle and derivations.
+ * @returns {{drones: Array, status: string, error: string, uniqueDrones: Array, dronePaths: Record<string, number[][]>}}
+ */
 function useDronesData() {
     const [{ drones, status, error }, dispatch] = useReducer(
         reducer,

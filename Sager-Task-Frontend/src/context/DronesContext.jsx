@@ -6,6 +6,10 @@ import useDronesData from "./useDronesData";
 
 const DronesContext = createContext();
 
+/**
+ * Provider exposing drone data and derived values to the app.
+ * Internally delegates data fetching and state to useDronesData.
+ */
 function DronesProvider({ children }) {
 	const { drones, status, error, uniqueDrones, dronePaths } = useDronesData();
 
@@ -24,6 +28,9 @@ function DronesProvider({ children }) {
 	);
 }
 
+/**
+ * Access the drones context. Throws if used outside the provider.
+ */
 function useDrones() {
 	const context = useContext(DronesContext);
 	if (context === undefined)

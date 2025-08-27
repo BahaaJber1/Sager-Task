@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 
 /**
- * Prepare computed props for a DroneItem
+ * Prepare computed props for a DroneItem.
+ * Centralizes derivation of last known location and allowed status.
  */
 export default function useDroneItemData({ drone, dronePaths }) {
     const data = useMemo(() => {

@@ -8,6 +8,7 @@ import Spinner from "../../../components/Spinner";
 import HorizontalLine from "../../../components/HorizontalLine";
 import useDronesListState from "../hooks/useDronesListState";
 
+// List of drones with simple tabbed UI; delegates state to a hook
 function DronesList() {
 	const { status, error, uniqueDrones } = useDrones();
 	const { isOpen, selectedTab, handleShow, handleTab } = useDronesListState();

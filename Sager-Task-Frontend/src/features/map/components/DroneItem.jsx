@@ -3,6 +3,7 @@ import HorizontalLine from "../../../components/HorizontalLine";
 import { useDrones } from "../../../context/DronesContext";
 import useDroneItemData from "../hooks/useDroneItemData";
 
+// Presentational drone list item; derives computed data via hook
 function DroneItem({ drone, selected }) {
 	const { dronePaths } = useDrones();
 	const { serial, registration, Name, organization, pilot, lng, lat, isAllowed } =

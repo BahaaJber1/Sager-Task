@@ -5,6 +5,7 @@ import HeaderUser from "./HeaderUser";
 function Header() {
 	return (
 		<header className="py-3 px-8 bg-black flex items-center justify-between">
+			{/* Left: brand logo; Right: menu and user section */}
 			<Logo />
 			<div className="flex items-center gap-8">
 				<HeaderMenu />

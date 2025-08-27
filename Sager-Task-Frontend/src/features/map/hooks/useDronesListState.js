@@ -1,7 +1,8 @@
 import { useCallback, useState } from "react";
 
 /**
- * Encapsulate UI state for the DronesList component
+ * Encapsulates UI state for the DronesList component.
+ * Keeps presentational components simple and focused on rendering only.
  */
 export default function useDronesListState() {
     const [isOpen, setIsOpen] = useState(true);

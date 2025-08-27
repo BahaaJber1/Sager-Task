@@ -1,5 +1,8 @@
 import { useMemo } from "react";
 
+/**
+ * Static sidebar navigation items.
+ */
 export default function useSidebarItems() {
     return useMemo(
         () => [
@@ -10,4 +13,4 @@ export default function useSidebarItems() {
     );
 }
 
-
+ 

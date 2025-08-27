@@ -13,9 +13,12 @@ const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 function App() {
 	return (
 		<BrowserRouter>
+			{/* Provide drone data globally */}
 			<DronesProvider>
+				{/* Lazy-load routes with a global fallback */}
 				<Suspense fallback={<Spinner />}>
 					<Routes>
+						{/* Shared layout wraps all routes */}
 						<Route element={<AppLayout />}>
 							<Route path="/" element={<Dashboard />} />
 							<Route path="/map/:registration/:lat/:lng" element={<Map />} />

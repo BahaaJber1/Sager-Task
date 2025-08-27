@@ -1,6 +1,7 @@
 import { useDrones } from "../../../context/DronesContext";
 import useRedDroneCount from "../hooks/useRedDroneCount";
 
+// Small widget showing count of non-allowed (red) drones
 export function RedDroneCounter() {
 	const { uniqueDrones } = useDrones();
 	const count = useRedDroneCount(uniqueDrones);

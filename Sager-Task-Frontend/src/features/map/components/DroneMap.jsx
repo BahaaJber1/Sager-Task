@@ -9,6 +9,7 @@ import { RedDroneCounter } from "./RedDroneCounter";
 const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
 mapboxgl.accessToken = mapboxToken;
 
+// Map container that initializes Mapbox and delegates overlays to a hook
 function DroneMap() {
 	const { lat, lng } = useParams();
 	const mapContainer = useRef(null);
