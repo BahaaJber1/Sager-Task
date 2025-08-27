@@ -2,8 +2,8 @@ import { useRef, useEffect } from "react";
 import { useParams } from "react-router";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useDrones } from "../../context/DronesContext";
-import useDroneMapLogic from "./useDroneMapLogic";
+import { useDrones } from "../../../context/DronesContext";
+import useDroneMapLogic from "../hooks/useDroneMapLogic";
 import { RedDroneCounter } from "./RedDroneCounter";
 
 const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;

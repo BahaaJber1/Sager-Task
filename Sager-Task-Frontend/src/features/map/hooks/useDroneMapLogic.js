@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
-import createDroneMarker from "../../utils/createDroneMarker";
-import updateDronePathsOnMap from "../../utils/updateDronePathsOnMap";
+import createDroneMarker from "../utils/createDroneMarker";
+import updateDronePathsOnMap from "../utils/updateDronePathsOnMap";
 
 /**
  * Custom hook to handle drone map logic: markers and paths.

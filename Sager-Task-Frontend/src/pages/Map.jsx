@@ -1,5 +1,5 @@
-import DroneMap from "../features/map/DroneMap";
-import DronesList from "../features/map/DronesList";
+import DroneMap from "../features/map/components/DroneMap";
+import DronesList from "../features/map/components/DronesList";
 
 function Map() {
 	return (

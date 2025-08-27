@@ -1,0 +1,13 @@
+import { useMemo } from "react";
+
+export default function useRedDroneCount(uniqueDrones) {
+    return useMemo(() => {
+        if (!uniqueDrones) return 0;
+        return uniqueDrones.filter((drone) => {
+            const reg = drone?.properties?.registration;
+            return !reg?.split("-")?.[1]?.startsWith("B");
+        }).length;
+    }, [uniqueDrones]);
+}
+
+

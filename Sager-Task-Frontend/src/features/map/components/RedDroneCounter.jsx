@@ -1,12 +1,9 @@
-import { useDrones } from "../../context/DronesContext";
+import { useDrones } from "../../../context/DronesContext";
+import useRedDroneCount from "../hooks/useRedDroneCount";
 
 export function RedDroneCounter() {
 	const { uniqueDrones } = useDrones();
-
-	const count = uniqueDrones.filter((drone) => {
-		const reg = drone.properties.registration;
-		return !reg?.split("-")[1]?.startsWith("B");
-	}).length;
+	const count = useRedDroneCount(uniqueDrones);
 
 	return (
 		<div className="absolute bottom-5 right-5 z-20 bg-white text-sm text-gray-900 px-4 py-3 rounded-lg shadow-lg ">

@@ -1,23 +1,17 @@
 import { Link } from "react-router";
+import useHeaderMenuItems from "./hooks/useHeaderMenuItems";
 
 function HeaderMenu() {
+	const items = useHeaderMenuItems();
 	return (
 		<ul className="flex gap-5">
-			<li>
-				<Link>
-					<img src="capture-svgrepo-com.svg" />
-				</Link>
-			</li>
-			<li>
-				<Link>
-					<img src="language-svgrepo-com.svg" />
-				</Link>
-			</li>
-			<li>
-				<Link>
-					<img src="bell.svg" />
-				</Link>
-			</li>
+			{items.map((item) => (
+				<li key={item.key}>
+					<Link>
+						<img src={item.icon} />
+					</Link>
+				</li>
+			))}
 		</ul>
 	);
 }
